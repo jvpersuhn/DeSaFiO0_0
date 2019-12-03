@@ -1,5 +1,5 @@
 class Bebida:
-    def __init__(self, codigo, nomeBebida, tipoBebida, volBebida, precoUnitario : float):
+    def __init__(self, codigo : int, nomeBebida, tipoBebida, volBebida, precoUnitario : float):
         self.__codigo = codigo
         self.__nomeBebida = nomeBebida
         self.__tipoBebida = tipoBebida
