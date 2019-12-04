@@ -37,3 +37,6 @@ class Pessoa:
 
     def apresentacao(self):
         return f'Codigo: {self.__codigo} Nome: {self.__nomeCompleto} Cpf: {self.__cpf} Data Nasc: {self.__dataNasc} Estado: {self.__estado} Cidade: {self.__estado} Cep: {self.__cep} Bairro: {self.__bairro} Rua: {self.__rua} N° casa: {self.__numeroCasa} Complemento: {self.__complemento}\n'
+
+    def getEndereco(self):
+        return f'Rua: {self.__rua} Bairro: {self.__bairro} N°: {self.__numeroCasa}'

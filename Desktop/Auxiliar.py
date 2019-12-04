@@ -1,6 +1,7 @@
 from Pessoa import Pessoa
 from Bebida import Bebida
 from RWArquivo import Arquivo
+from Venda import Venda
 
 class Auxiliar:
     def exibeMenu():
@@ -48,3 +49,42 @@ class Auxiliar:
 
         for i in bebidas:
             print(i.Apresentacao())
+
+    def cadastraPedido():
+        cod = int(input('Digite o codigo da compra: '))
+        dtVenda = input('Digite a data da venda: ')
+        codCliente = int(input('Digite o codigo do cliente comprador: '))
+        codCerveja = int(input('Digite o codigo da cerveja: '))
+        qtdComprada = int(input('Digite a quantidade de cerveja comprada: '))
+
+        compra = Venda(cod, dtVenda, codCliente, codCerveja, qtdComprada)
+        Arquivo.GravarVenda(compra)
+
+    
+    def retornaPessoa(cod, pessoa):
+        for i in pessoa:
+            if i.getCodigo() == cod:
+                return i
+
+    def retornaBebida(cod, beb):
+        for i in beb:
+            if i.getCodigo() == cod:
+                return i
+
+    def precoTotal(qtd , preco):
+        return int(qtd) * float(preco)
+
+    def listaPedidos():
+        compras = Arquivo.LerVenda()
+        pessoa = Arquivo.LerPessoas()
+        bebida = Arquivo.LerBebida()
+
+        for i in compras:
+            pessoaApr = Auxiliar.retornaPessoa(i.getCliente(), pessoa)
+            bebidaApr = Auxiliar.retornaBebida(i.getBebida(), bebida)
+            apresentacao = f'Codigo da venda: {i.getCodigoVenda()} Codigo da pessoa: {pessoaApr.getCodigo()} Nome cliente: {pessoaApr.getNomeCompleto()}'
+            apresentacao += f'Endereco: {pessoaApr.getEndereco()} Codigo bebida: {bebidaApr.getCodigo()} Nome bebida: {bebidaApr.getNomeBebida()} Quantidade comprada: {i.getQtdComprada()}' 
+            apresentacao += f'Valor unitario: {bebidaApr.getPrecoUnitario()} Preco total: {Auxiliar.precoTotal(i.getQtdComprada(), bebidaApr.getPrecoUnitario())}'
+            print(apresentacao,'\n')
+
+
